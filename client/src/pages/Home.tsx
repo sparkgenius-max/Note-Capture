@@ -5,21 +5,21 @@ import { ScanLine, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
-  const { 
-    items, 
-    processImage, 
-    isProcessing, 
-    progress, 
-    updateItem, 
+  const {
+    items,
+    processImage,
+    isProcessing,
+    progress,
+    updateItem,
     deleteItem,
-    clearAll 
+    clearAll
   } = useOCR();
-  
+
   const { toast } = useToast();
 
   const handleFileDrop = async (files: File[]) => {
     if (files.length === 0) return;
-    
+
     try {
       await processImage(files[0]);
       toast({
@@ -41,19 +41,17 @@ export default function Home() {
       {/* Header Bar */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
-              <ScanLine className="w-5 h-5" />
-            </div>
-            <h1 className="font-display font-bold text-xl tracking-tight">DocExtract<span className="text-primary">.ai</span></h1>
+          <div className="flex items-center gap-3">
+            <img src="/favicon.png" alt="DocExtract Logo" className="w-9 h-9 object-contain" />
+            <h1 className="font-display font-bold text-xl tracking-tight">DocExtract</h1>
           </div>
-          
+
           <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-muted-foreground">
             <span className="hover:text-primary transition-colors cursor-pointer">How it works</span>
             <span className="hover:text-primary transition-colors cursor-pointer">About</span>
-            <a 
-              href="https://github.com/naptha/tesseract.js" 
-              target="_blank" 
+            <a
+              href="https://github.com/naptha/tesseract.js"
+              target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
             >
@@ -76,12 +74,12 @@ export default function Home() {
 
         {/* Upload Section */}
         <div className="max-w-4xl mx-auto mb-16">
-          <UploadZone 
-            onDrop={handleFileDrop} 
-            isProcessing={isProcessing} 
+          <UploadZone
+            onDrop={handleFileDrop}
+            isProcessing={isProcessing}
             progress={progress}
           />
-          
+
           <div className="flex flex-col md:flex-row gap-6 justify-center text-sm text-muted-foreground mt-8">
             <div className="flex items-center gap-2 px-4 py-2 bg-card rounded-full border border-border shadow-sm">
               <div className="w-2 h-2 rounded-full bg-green-500" />
@@ -101,7 +99,7 @@ export default function Home() {
         {/* Results Section */}
         <div className="max-w-6xl mx-auto">
           <div className="bg-muted/30 rounded-3xl p-1 md:p-8">
-            <ResultsTable 
+            <ResultsTable
               items={items}
               onUpdate={updateItem}
               onDelete={deleteItem}

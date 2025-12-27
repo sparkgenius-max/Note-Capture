@@ -1,6 +1,10 @@
-import { users, type User, type InsertUser } from "@shared/schema";
+// import { users, type User, type InsertUser } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
+
+// Dummy types since we are not using the DB for users in this client-side app
+type User = { id: number; username: string };
+type InsertUser = { username: string };
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
